@@ -26,7 +26,7 @@ public class PictureTester
     caterpillar.explore();
   }
   
-  /** Method to test mirrorTemple */
+  /** Method to test mirrorTemple*/
   public static void testMirrorTemple()
   {
     Picture temple = new Picture("temple.jpg");
@@ -38,9 +38,9 @@ public class PictureTester
   /** Method to test mirrorArms*/
   public static void testMirrorArms()
   {
-    Picture snowman = new Snowman("snowman.jpg");
+    Picture snowman = new Picture("snowman.jpg");
     snowman.explore();
-    snowmman.mirrorArms();
+    snowman.mirrorArms();
     snowman.explore();
   }
   
