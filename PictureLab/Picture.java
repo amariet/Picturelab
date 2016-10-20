@@ -356,16 +356,16 @@ public class Picture extends SimplePicture
      */
     public void mirrorGull()
     {
-        int mirrorPoint = 345;
+        int mirrorPoint = 375;
         Pixel rightPixel = null;
         Pixel leftPixel = null;
         Pixel[][] pixels = this.getPixels2D();
-        for(int row = 235; row < 323; row++)
+        for(int row = 230; row < 320; row++)
         {
-            for(int col = 238; col < mirrorPoint ; col++)
+            for(int col = 235; col < 348 ; col++)
             {
                 rightPixel = pixels[row][col];
-                leftPixel = pixels[mirrorPoint - col + mirrorPoint/3][row];
+                leftPixel = pixels[row][col - 235 + mirrorPoint];
                 leftPixel.setColor(rightPixel.getColor());
             }
         }
@@ -413,19 +413,23 @@ public class Picture extends SimplePicture
     }
 
     /** Method to create a collage that copies just part of fromPic*/ 
-    public void copy2(Picture fromPic, int startRow, int endRow, int startCol, int endCol)
+    public void copy2(Picture fromPic, int startRow, int startCol, int fromStartRow, int fromEndRow, int fromStartCol, int fromEndCol)
     {
         Pixel fromPixel = null;
         Pixel toPixel = null;
         Pixel[][] toPixels = this.getPixels2D();
         Pixel[][] fromPixels = fromPic.getPixels2D();
-        for(int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < endRow; fromRow++, toRow++)
+        int a = fromPixels.length;
+        int b = fromPixels[0].length;
+        for(int fromRow = fromStartRow, toRow = startRow; fromRow < fromEndRow && toRow < toPixels.length; fromRow++, toRow++)
         {
-            for(int fromCol = 0, toCol = startCol; fromRow < fromPixels[0].length && toCol < endCol; fromCol++, toCol++)
+            for(int fromCol = fromStartCol, toCol = startCol; fromRow < fromEndCol && toCol < toPixels[0].length; fromCol++, toCol++)
             {
-                fromPixel = fromPixels[fromRow][fromCol];
-                toPixel = toPixels[toRow][toCol];
-                toPixel.setColor(fromPixel.getColor());
+                if(fromRow < a && fromCol < b){
+                    fromPixel = fromPixels[fromRow][fromCol];
+                    toPixel = toPixels[toRow][toCol];
+                    toPixel.setColor(fromPixel.getColor());
+                }
             }
         }
     }
@@ -471,14 +475,36 @@ public class Picture extends SimplePicture
 
     /** Method  that compares the current pixel with 
      * the one below and sets the current pixel color 
-     * to black as well when thecolor distance is greater
+     * to black as well when the color distance is greater
      * than the specified edge distance
      * */
-    public void edgeDetection2()
-    {
-        
+    public void edgeDetection2(int edgeDist)
+    {        
+        {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            Pixel[][] pixels = this.getPixels2D();
+            Color rightColor = null;
+            for (int row = 0; row < pixels.length; row++)
+            {
+                for (int col = 0; col < pixels[0].length - 1; col++)
+                {
+                    leftPixel = pixels[row][col];
+                    rightPixel = pixels[row][col + 1];
+                    rightColor = rightPixel.getColor();
+                    if (leftPixel.colorDistance(rightColor) > edgeDist)
+                    {
+                        leftPixel.setColor(Color.BLACK);
+                    }
+                    else 
+                    {
+                        leftPixel.setColor(Color.WHITE);
+                    }
+                }
+            }
+        }
     }
-    
+
     /** Main method for testing - each class in Java can have a main 
      * method 
      */
