@@ -137,7 +137,16 @@ public class PictureTester
     public static void testCollage()
     {
         Picture canvas = new Picture("640x480.jpg");
-        canvas.createCollage();
+        //canvas.createCollage();
+        canvas.collage();
+        canvas.explore();
+    }
+    
+    /** Method to test myCollage */
+    public static void testMyCollage()
+    {
+        Picture canvas = new Picture("640x480.jpg");
+        canvas.myCollage();
         canvas.explore();
     }
 
@@ -152,7 +161,9 @@ public class PictureTester
     /**Method to test edgeDetection2*/
     public static void testEdgeDetection2()
     {
-        
+        Picture swan = new Picture("swan.jpg");
+        swan.edgeDetection2(10);
+        swan.explore();
     }
     
     /** Main method for testing.  Every class can have a main
@@ -178,6 +189,7 @@ public class PictureTester
         //testMirrorArms();
         //testMirrorGull();
         //testCollage();
+        //testMyCollage();
         //testCopy();
         //testEdgeDetection();
         //testEdgeDetection2();
