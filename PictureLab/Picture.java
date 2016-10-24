@@ -516,11 +516,11 @@ public class Picture extends SimplePicture
         Pixel leftPixel = null;
         Pixel rightPixel = null;
         Pixel currentPixel = null;
-        Pixel otherPixel = null;
+        //Pixel otherPixel = null;
         Pixel[][] pixels = this.getPixels2D();
         Color rightColor = null;
         Color currentColor = null;
-        Color otherColor = null;
+        //Color otherColor = null;
         for (int row = 0; row < pixels.length; row++)
         {
             for (int col = 0; col < pixels[0].length-1; col++)
@@ -530,9 +530,10 @@ public class Picture extends SimplePicture
                 if (row < pixels.length - 1)
                 {
                     currentPixel = pixels[row+1][col];
+                    //otherPixel = pixels[row+2][col];
                     rightColor = rightPixel.getColor();
                     currentColor = currentPixel.getColor();
-                    otherColor = otherPixel.getColor();
+                    //otherColor = otherPixel.getColor();
                 }
                 if((leftPixel.colorDistance(rightColor) > edgeDist)) //| leftPixel.colorDistance(otherColor) > edgeDist)
                 {
