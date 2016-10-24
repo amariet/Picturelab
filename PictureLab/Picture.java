@@ -433,14 +433,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-
-    /** My own collage that has at least three pictures copied 
-     * three times with three different picture manipulations 
-     * and at least one mirroring
-     */
-    public void myCollage()
-    {
-        
+    
     /** My own collage that has at least three pictures copied 
      * three times with three different picture manipulations 
      * and at least one mirroring
