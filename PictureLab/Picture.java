@@ -441,6 +441,39 @@ public class Picture extends SimplePicture
     public void myCollage()
     {
         
+    /** My own collage that has at least three pictures copied 
+     * three times with three different picture manipulations 
+     * and at least one mirroring
+     */
+    public void myCollage()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (int row = 0; row < pixels.length; row++)
+        {
+            for(int col = 0; col < pixels[row].length; col++)
+            {
+                Pixel a = pixels[row][col];
+                a.setGreen((int)(Math.random()*256));
+                a.setBlue((int)(Math.random()*256));
+                a.setRed((int)(Math.random()*256));
+            }       
+        }
+        Picture krabs = new Picture();
+        Picture mouse = new Picture();
+        Picture frog = new Picture();
+        Picture sponge = new Picture();
+        Picture mouse2 = new Picture();
+        mouse.grayscale();
+        mouse2.grayscale();
+        frog.negate();
+        krabs.keepOnlyBlue();
+        this.copy(krabs.scale(.,.), 0, 0);
+        this.mirrorVertical();
+        this.mirrorHorizontal();
+        this.copyPartial (mouse, , , , , );
+        this.copyPartial (frog.scale(.,.), , , , , ,);
+        this.copyPartial (sponge, , , , , ,);
+        this.copyPartial (mouse2, , , , , ,);
     }
 
     /** Method to show large changes in color 
@@ -480,26 +513,31 @@ public class Picture extends SimplePicture
      * */
     public void edgeDetection2(int edgeDist)
     {        
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        Pixel currentPixel = null;
+        Pixel[][] pixels = this.getPixels2D();
+        Color rightColor = null;
+        Color otherColor = null;
+        for (int row = 0; row < pixels.length; row++)
         {
-            Pixel leftPixel = null;
-            Pixel rightPixel = null;
-            Pixel[][] pixels = this.getPixels2D();
-            Color rightColor = null;
-            for (int row = 0; row < pixels.length; row++)
+            for (int col = 0; col < pixels[0].length-1; col++)
             {
-                for (int col = 0; col < pixels[0].length - 1; col++)
+                leftPixel = pixels[row][col];
+                rightPixel = pixels[row][col+1];
+                if (row < pixels.length - 1)
                 {
-                    leftPixel = pixels[row][col];
-                    rightPixel = pixels[row][col + 1];
+                    currentPixel = pixels[row+1][col];
                     rightColor = rightPixel.getColor();
-                    if (leftPixel.colorDistance(rightColor) > edgeDist)
-                    {
-                        leftPixel.setColor(Color.BLACK);
-                    }
-                    else 
-                    {
-                        leftPixel.setColor(Color.WHITE);
-                    }
+                    otherColor = currentPixel.getColor();
+                }
+                if((leftPixel.colorDistance(rightColor) > edgeDist) | leftPixel.colorDistance(otherColor) > edgeDist)
+                {
+                    leftPixel.setColor(Color.BLACK);
+                }
+                else 
+                {
+                    leftPixel.setColor(Color.WHITE);
                 }
             }
         }
