@@ -451,22 +451,22 @@ public class Picture extends SimplePicture
                 a.setRed((int)(Math.random()*256));
             }       
         }
-        Picture krabs = new Picture();
-        Picture mouse = new Picture();
-        Picture frog = new Picture();
-        Picture sponge = new Picture();
-        Picture mouse2 = new Picture();
+        Picture krabs = new Picture(".jpg");
+        Picture mouse = new Picture(".jpg");
+        Picture frog = new Picture(".jpg");
+        Picture sponge = new Picture(".jpg");
+        Picture mouse2 = new Picture(".jpg");
         mouse.grayscale();
         mouse2.grayscale();
         frog.negate();
         krabs.keepOnlyBlue();
-        this.copy(krabs.scale(.,.), 0, 0);
+        this.copy(krabs.scale(.85 , .85), 0, 0);
         this.mirrorVertical();
         this.mirrorHorizontal();
-        this.copyPartial (mouse, , , , , );
-        this.copyPartial (frog.scale(.,.), , , , , ,);
-        this.copyPartial (sponge, , , , , ,);
-        this.copyPartial (mouse2, , , , , ,);
+        this.copyPartial (mouse, 138, 10, 31, 180, 46, 213);
+        this.copyPartial (frog.scale(.7 , .7), 230, 180, 36, 360, 114, 470);
+        this.copyPartial (sponge, 0, 250, 13, 170, 110, 230);
+        this.copyPartial (mouse2, 115, 383, 31, 180, 46, 213);
     }
 
     /** Method to show large changes in color 
